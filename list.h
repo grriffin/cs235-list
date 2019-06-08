@@ -25,13 +25,15 @@ public:
     list() : numElements(0), pHead(NULL), pTail(NULL) {}
     list(const list<T> &rhs) : pHead(NULL), pTail(NULL), numElements(0) { *this = rhs; }
     ~list() { clear(); }
-    list<T> &operator=(const list<T> &rhs) {
+    list<T> &operator=(const list<T> &rhs)
+    {
         Node *iter = rhs.pHead;
-        while (iter != rhs.pTail) {
+        while (iter != nullptr)
+        {
             this->push_back(iter->data);
             iter = iter->pNext;
         }
-
+        numElements = rhs.numElements;
         return *this;
     }
 
@@ -107,6 +109,9 @@ void list<T>::clear()
         delete pNode;
         pNode = pNext;
     }
+    pHead = nullptr;
+    pTail = nullptr;
+    numElements = 0;
 }
 
 template <typename T>
@@ -121,8 +126,10 @@ void list<T>::push_front(const T &data)
     {
         Node *pNewNode = createNode(data);
         pNewNode->pNext = pHead;
+        pHead->pPrev = pNewNode;
         pHead = pNewNode;
     }
+    numElements++;
 }
 
 template <typename T>
@@ -137,8 +144,10 @@ void list<T>::push_back(const T &data)
     {
         Node *pNewNode = createNode(data);
         pNewNode->pPrev = pTail;
+        pTail->pNext = pNewNode;
         pTail = pNewNode;
     }
+    numElements++;
 }
 
 template <typename T>
@@ -200,9 +209,8 @@ typename list<T>::iterator list<T>::insert(iterator &it, const T &data)
     pCurrent->pPrev = pNew;
     prev->pNext = pNew;
     next->pPrev = pNew;
+    numElements++;
     return iterator(pNew);
-
-    return NULL;
 }
 
 template <typename T>
@@ -231,6 +239,7 @@ typename list<T>::iterator list<T>::erase(iterator it)
     prev->pNext = next;
     next->pPrev = prev;
     delete it.p;
+    numElements--;
     return iterator(next);
 }
 
