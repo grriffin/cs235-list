@@ -63,13 +63,13 @@ void fibonacci()
 //nondefault
 Fib::Fib(const int &t)
 {
-    
+   numbers.push_front(t);
 }
 
 //copy constructor
 Fib::Fib(const Fib &rhs)
 {
-  
+   *this = rhs;
 }
 
 //operator +=
@@ -81,7 +81,12 @@ Fib & Fib::operator+=(const Fib &rhs)
 //operator =
 Fib & Fib::operator=(const Fib &rhs)
 {
-    
+   this->numbers = rhs.numbers;
+   return *this;
 }
 
 //operator <<
+ostream& operator << (ostream& out, const Fib& fib)
+{
+   
+}
