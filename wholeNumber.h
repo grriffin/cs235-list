@@ -75,6 +75,7 @@ WholeNumber & operator += (WholeNumber & rhs) {
 
 // assignment operator for numbers
 WholeNumber & operator = (unsigned int value) {
+    
 }
 
 // assignment operator for values
