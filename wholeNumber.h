@@ -3,6 +3,8 @@
 
 #include <ostream>
 #include "list.h"
+#include <iomanip>
+#include <iostream>
 
 /************************************************
 * WHOLE NUMBER
@@ -22,14 +24,42 @@ WholeNumber(unsigned int value) { *this = value; }
 WholeNumber(const WholeNumber & rhs) { *this = rhs; }
 
 // display the number
-friend std::ostream & operator << (std::ostream & out,
-const WholeNumber & rhs);
+friend std::ostream & operator << (std::ostream & out, WholeNumber & rhs) {
+    int num = 0; // count for the comma
+    // traverse through the nodes
+    for (custom::list<int>::reverse_iterator it = rhs.data.rbegin(); it != rhs.data.rend(); ++it) {
+        if (!(num%3)) { // comma if there is another set of 3
+            std::cout << std::setfill('0') << std::setw(3) << *it;
+            std::cout << ", "; 
+            num++;
+        } else { // no comma if there isn't another set of 3
+            std::cout << *it;
+            num++;
+        }
+
+    }
+    // output the numbers in each node
+}
 
 // fetch a given number
-friend std::istream & operator >> (std::istream & in, WholeNumber & rhs);
+friend std::istream & operator >> (std::istream & in, WholeNumber & rhs) {
+    int num;
+    in >> num;
+    WholeNumber n2(num);
+    rhs = n2;
+    return in;
+}
 
 // add onto a given whole number
-WholeNumber & operator += (const WholeNumber & rhs);
+WholeNumber & operator += (const WholeNumber & rhs) {
+    int MAX = 1000;
+    int carrOver = 0;
+
+    custom::list<int>::iterator lhsIt = this->data.begin();
+    custom::list<int>::iterator rhsIt = rhs->data.begin();
+
+    while (lhsIt != lhsIt != lhsIt->data->end()
+}
 
 // assignment operator for numbers
 WholeNumber & operator = (unsigned int value);
