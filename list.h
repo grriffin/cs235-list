@@ -211,6 +211,19 @@ typename list<T>::iterator list<T>::erase(iterator it)
         pHead = next;
         return iterator(pHead);
     }
+
+    if (next == nullptr)
+    {
+        delete it.p;
+        prev->pNext = nullptr;
+        pTail = prev;
+        return iterator(prev);
+    }
+
+    prev->pNext = next;
+    next->pPrev = prev;
+    delete it.p;
+    return iterator(next);
 }
 
 template <typename T>
