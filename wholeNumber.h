@@ -52,19 +52,30 @@ friend std::istream & operator >> (std::istream & in, WholeNumber & rhs) {
 
 // add onto a given whole number
 WholeNumber & operator += (WholeNumber & rhs) {
-    int MAX = 1000;
-    int carrOver = 0;
+    const int MAX = 1000;
+    int carryOver = 0;
 
     custom::list<int>::iterator lhsIt = this->data.begin();
     custom::list<int>::iterator rhsIt = rhs.data.begin();
 
-    while (lhsIt != this->data.end() || rhsIt != rhs.data.end()) {
+    custom::list<int> newList = custom::list<int>();
 
+    while (lhsIt != this->data.end() || rhsIt != rhs.data.end()) {
+        int total = *lhsIt + *rhsIt + carryOver;
+        int totalAfter = total % MAX;
+        newList.push_front(totalAfter);
+        lhsIt++;
+        rhsIt++;
     }
+    if (carryOver) {
+        newList.push_front(carryOver);
+    }
+    return *this;
 }
 
 // assignment operator for numbers
-WholeNumber & operator = (unsigned int value);
+WholeNumber & operator = (unsigned int value) {
+}
 
 // assignment operator for values
 WholeNumber & operator = (const WholeNumber & rhs)
