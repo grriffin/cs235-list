@@ -25,7 +25,17 @@ public:
     list() : numElements(0), pHead(NULL), pTail(NULL) {}
     list(const list<T> &rhs) : pHead(NULL), pTail(NULL), numElements(0) { *this = rhs; }
     ~list() { clear(); }
-    list<T> &operator=(const list<T> &rhs);
+    list<T> &operator=(const list<T> &rhs) {
+        if (this == rhs)
+            return *this;
+        Node<T> *iter = rhs.pHead;
+        while (iter != rhs.pTail) {
+            this->push_back(iter->data);
+            iter = iter->next;
+        }
+
+        return *this;
+    }
 
     // standard container interfaces
     void clear();
