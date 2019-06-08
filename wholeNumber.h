@@ -41,7 +41,7 @@ data = rhs.data;
 return *this;
 }
 private:
-list <int> data;
+custom::list <int> data;
 };
 
 #endif // WHOLE_NUMBER_H
