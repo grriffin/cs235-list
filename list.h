@@ -275,6 +275,16 @@ typename list<T>::iterator list<T>::insert(iterator &it, const T &data)
         throw "No position specified";
     }
 
+    if (it == end()) 
+    {
+       pTail->pNext = pNew;
+       pNew->pPrev = pTail;
+       pTail = pNew;
+       it = pNew;
+       numElements++;
+       return iterator(pNew);
+    }
+
     Node *pCurrent = it.p;
     Node *prev = pCurrent->pPrev;
     Node *next = pCurrent->pNext;
