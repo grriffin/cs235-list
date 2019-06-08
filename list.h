@@ -413,5 +413,158 @@ private:
     friend class list;
 };
 
+/*************************************************
+* LIST ITERATOR
+* Iterate through a List backwards, non-constant version
+************************************************/
+template <typename T>
+class list<T>::const_iterator
+{
+public:
+    // constructors, destructors, and assignment operator
+    const_iterator() : p(NULL) {}
+    const_iterator(Node *p) : p(p) {}
+    const_iterator(const const_iterator &rhs) { *this = rhs; }
+    iterator &operator=(const const_iterator &rhs)
+    {
+        p = rhs.p;
+        return *this;
+    }
+
+    // equals, not equals operator
+    bool operator==(const const_iterator &rhs) const
+    {
+        return rhs.p == this->p;
+    }
+    bool operator!=(const const_iterator &rhs) const
+    {
+        return rhs.p != this->p;
+    }
+
+    // dereference operator, fetch a node
+    T &operator*()
+    {
+        if (p)
+            return p->data;
+        else
+            throw "ERROR: Trying to dereference a NULL pointer";
+    }
+
+    // postfix increment
+    const_iterator operator++(int postfix)
+    {
+        const_iterator old(*this);
+        if (p)
+            p = p->pNext;
+        return old;
+    }
+
+    // prefix increment
+    const_iterator &operator++()
+    {
+        if (p)
+            p = p->pNext;
+        return *this;
+    }
+
+    // postfix decrement
+    const_iterator operator--(int postfix)
+    {
+        const_iterator old(*this);
+        if (p)
+            p = p->pPrev;
+        return old;
+    }
+
+    // prefix decrement
+    iterator &operator--()
+    {
+        if (p)
+            p = p->pPrev;
+        return *this;
+    }
+
+private:
+    list<T>::Node *p;
+    friend class list;
+};
+
+/*************************************************
+* LIST REVERSE ITERATOR
+* Iterate through a List backwards, non-constant version
+************************************************/
+template <typename T>
+class list<T>::const_reverse_iterator
+{
+public:
+    // constructors, destructors, and assignment operator
+    const_reverse_iterator() : p(NULL) {}
+    const_reverse_iterator(Node *p) : p(p) {}
+    const_reverse_iterator(const const_reverse_iterator &rhs) { *this = rhs; }
+    const_reverse_iterator &operator=(const const_reverse_iterator &rhs)
+    {
+        p = rhs.p;
+        return *this;
+    }
+
+    // equals, not equals operator
+    bool operator==(const const_reverse_iterator &rhs) const
+    {
+        return rhs.p == this->p;
+    }
+    bool operator!=(const const_reverse_iterator &rhs) const
+    {
+        return rhs.p != this->p;
+    }
+
+    // dereference operator, fetch a node
+    T &operator*()
+    {
+        if (p)
+            return p->data;
+        else
+            throw "ERROR: Trying to dereference a NULL pointer";
+    }
+
+    // postfix increment
+    const_reverse_iterator operator++(int postfix)
+    {
+        reverse_iterator old(*this);
+        if (p)
+            p = p->pPrev;
+        return old;
+    }
+
+    // prefix increment
+    const_reverse_iterator &operator++()
+    {
+        if (p)
+            p = p->pPrev;
+        return *this;
+    }
+
+    // postfix decrement
+    const_reverse_iterator operator--(int postfix)
+    {
+        const_reverse_iterator old(*this);
+        if (p)
+            p = p->pNext;
+        return old;
+    }
+
+    // prefix decrement
+    const_reverse_iterator &operator--()
+    {
+        if (p)
+            p = p->pNext;
+        return *this;
+    }
+
+private:
+    list<T>::Node *p;
+
+    friend class list;
+};
+
 } // namespace custom
 #endif
