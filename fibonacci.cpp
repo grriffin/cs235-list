@@ -50,9 +50,9 @@ void fibonacci()
    //does not handle very large numbers such as fib #100.
    for (int i = 1; i < number; i++)
    {
-      temp = second;             //Temp Holder
-      second += first;          //Add the two Fibonacci numbers
-      first = temp;             //increment up
+      temp = second;             
+      second += first;          
+      first = temp;             
       
       if (i == number - 1)
       cout << second << endl;
