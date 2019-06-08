@@ -51,14 +51,14 @@ friend std::istream & operator >> (std::istream & in, WholeNumber & rhs) {
 }
 
 // add onto a given whole number
-WholeNumber & operator += (const WholeNumber & rhs) {
+WholeNumber & operator += (WholeNumber & rhs) {
     int MAX = 1000;
     int carrOver = 0;
 
     custom::list<int>::iterator lhsIt = this->data.begin();
-    custom::list<int>::iterator rhsIt = rhs->data.begin();
+    custom::list<int>::iterator rhsIt = rhs.data.begin();
 
-    while (lhsIt != lhsIt->data.end() || rhsIt != rhs->data.end()) {
+    while (lhsIt != this->data.end() || rhsIt != rhs.data.end()) {
 
     }
 }
