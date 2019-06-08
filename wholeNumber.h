@@ -58,7 +58,7 @@ WholeNumber & operator += (const WholeNumber & rhs) {
     custom::list<int>::iterator lhsIt = this->data.begin();
     custom::list<int>::iterator rhsIt = rhs->data.begin();
 
-    while (lhsIt != lhsIt != lhsIt->data->end()
+    while (lhsIt != lhsIt != this->data.end())
 }
 
 // assignment operator for numbers
