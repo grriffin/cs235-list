@@ -19,7 +19,7 @@ void fibonacci();
 class Fib
 {
 private: 
-  List<int> numbers;
+ // List<int> numbers;
 public:
   Fib(){}
   Fib(const int &t);
