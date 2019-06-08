@@ -40,6 +40,7 @@ public:
     ~list() { clear(); }
     list<T> &operator=(const list<T> &rhs)
     {
+       clear();
         Node *iter = rhs.pHead;
         while (iter != nullptr)
         {
@@ -94,6 +95,83 @@ private:
     Node *pHead;     // pointer to the beginning of the list
     Node *pTail;     // pointer to the ending of the list
 };
+
+/*************************************************
+* LIST ITERATOR
+* Iterate through a List backwards, non-constant version
+************************************************/
+template <typename T>
+class list<T>::iterator
+{
+public:
+   // constructors, destructors, and assignment operator
+   iterator() : p(NULL) {}
+   iterator(Node* p) : p(p) {}
+   iterator(const iterator& rhs) { *this = rhs; }
+   iterator& operator=(const iterator& rhs)
+   {
+      p = rhs.p;
+      return *this;
+   }
+
+   // equals, not equals operator
+   bool operator==(const iterator& rhs) const
+   {
+      return rhs.p == this->p;
+   }
+   bool operator!=(const iterator& rhs) const
+   {
+      return rhs.p != this->p;
+   }
+
+   // dereference operator, fetch a node
+   T& operator*()
+   {
+      if (p)
+         return p->data;
+      else
+         throw "ERROR: Trying to dereference a NULL pointer";
+   }
+
+   // postfix increment
+   iterator operator++(int postfix)
+   {
+      iterator old(*this);
+      if (p)
+         p = p->pNext;
+      return old;
+   }
+
+   // prefix increment
+   iterator& operator++()
+   {
+      if (p)
+         p = p->pNext;
+      return *this;
+   }
+
+   // postfix decrement
+   iterator operator--(int postfix)
+   {
+      iterator old(*this);
+      if (p)
+         p = p->pPrev;
+      return old;
+   }
+
+   // prefix decrement
+   iterator& operator--()
+   {
+      if (p)
+         p = p->pPrev;
+      return *this;
+   }
+
+private:
+   list<T>::Node* p;
+   friend class list;
+};
+
 
 template <typename T>
 typename list<T>::Node *list<T>::createNode()
@@ -290,81 +368,6 @@ public:
     }
 };
 
-/*************************************************
-* LIST ITERATOR
-* Iterate through a List backwards, non-constant version
-************************************************/
-template <typename T>
-class list<T>::iterator
-{
-public:
-    // constructors, destructors, and assignment operator
-    iterator() : p(NULL) {}
-    iterator(Node *p) : p(p) {}
-    iterator(const iterator &rhs) { *this = rhs; }
-    iterator &operator=(const iterator &rhs)
-    {
-        p = rhs.p;
-        return *this;
-    }
-
-    // equals, not equals operator
-    bool operator==(const iterator &rhs) const
-    {
-        return rhs.p == this->p;
-    }
-    bool operator!=(const iterator &rhs) const
-    {
-        return rhs.p != this->p;
-    }
-
-    // dereference operator, fetch a node
-    T &operator*()
-    {
-        if (p)
-            return p->data;
-        else
-            throw "ERROR: Trying to dereference a NULL pointer";
-    }
-
-    // postfix increment
-    iterator operator++(int postfix)
-    {
-        iterator old(*this);
-        if (p)
-            p = p->pNext;
-        return old;
-    }
-
-    // prefix increment
-    iterator &operator++()
-    {
-        if (p)
-            p = p->pNext;
-        return *this;
-    }
-
-    // postfix decrement
-    iterator operator--(int postfix)
-    {
-        iterator old(*this);
-        if (p)
-            p = p->pPrev;
-        return old;
-    }
-
-    // prefix decrement
-    iterator &operator--()
-    {
-        if (p)
-            p = p->pPrev;
-        return *this;
-    }
-
-private:
-    list<T>::Node *p;
-    friend class list;
-};
 
 /*************************************************
 * LIST REVERSE ITERATOR
