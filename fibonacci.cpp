@@ -21,18 +21,67 @@ using namespace std;
  ***********************************************/
 void fibonacci()
 {
-   // show the first serveral Fibonacci numbers
-   int number;
+    int number;
    cout << "How many Fibonacci numbers would you like to see? ";
    cin  >> number;
 
+   //Will need to be of type Fib, but this works for now
+   long int first = 0;
+   long int second = 1;
+   long int temp;
+   cout << 1 << endl;
    // your code to display the first <number> Fibonacci numbers
+   for (int i = 1; i < number; i++)
+   {
+      temp = second;           
+      second += first;          
+      first = temp;            
 
-   // prompt for a single large Fibonacci
+      cout << second << ",";
+   }
+   
+   cout << endl;
+   
+    // prompt for a single large Fibonacci
    cout << "Which Fibonacci number would you like to display? ";
    cin  >> number;
-
-   // your code to display the <number>th Fibonacci number
+   
+   first = 0;
+   second = 1;
+   //does not handle very large numbers such as fib #100.
+   for (int i = 1; i < number; i++)
+   {
+      temp = second;          
+      second += first;      
+      first = temp;   
+      
+      if (i == number - 1)
+      cout << second << endl;
+   }
 }
 
+//nondefault
+Fib::Fib(const int &t)
+{
+    
+}
 
+//copy constructor
+Fib::Fib(const Fib &rhs)
+{
+  
+}
+
+//operator +=
+Fib & Fib::operator+=(const Fib &rhs)
+{
+    
+}
+
+//operator =
+Fib & Fib::operator=(const Fib &rhs)
+{
+    
+}
+
+//operator <<
