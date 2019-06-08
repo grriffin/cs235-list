@@ -84,9 +84,8 @@ typename list<T>::Node *list<T>::createNode()
 template <typename T>
 typename list<T>::Node *list<T>::createNode(const T &t)
 {
-    Node *p = new (std::nothrow) Node(t);
-    if (p == nullptr)
-        throw "ERROR: unable to access data from an empty list";
+    Node *p = createNode();
+    p->data = t;
     return p;
 }
 
@@ -246,7 +245,6 @@ public:
     {
         data = t;
     }
-    friend class list;
 };
 
 /*************************************************
@@ -322,6 +320,7 @@ public:
 
 private:
     list<T>::Node *p;
+    friend class list;
 };
 
 /*************************************************
@@ -397,6 +396,8 @@ public:
 
 private:
     list<T>::Node *p;
+
+    friend class list;
 };
 
 } // namespace custom
