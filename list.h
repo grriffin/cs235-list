@@ -26,12 +26,10 @@ public:
     list(const list<T> &rhs) : pHead(NULL), pTail(NULL), numElements(0) { *this = rhs; }
     ~list() { clear(); }
     list<T> &operator=(const list<T> &rhs) {
-        if (this == rhs)
-            return *this;
-        Node<T> *iter = rhs.pHead;
+        Node *iter = rhs.pHead;
         while (iter != rhs.pTail) {
             this->push_back(iter->data);
-            iter = iter->next;
+            iter = iter->pNext;
         }
 
         return *this;

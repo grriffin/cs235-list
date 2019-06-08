@@ -1,3 +1,9 @@
+#ifndef wholeNumber_h
+#define wholeNumber_h
+
+#include <ostream>
+#include "list.h"
+
 /************************************************
 * WHOLE NUMBER
 * A class to represent an arbitrary large whole
