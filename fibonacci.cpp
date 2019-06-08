@@ -25,6 +25,7 @@ void fibonacci()
    cout << "How many Fibonacci numbers would you like to see? ";
    cin  >> number;
 
+   //Will need to be of type Fib, but this works for now
    long int first = 0;
    long int second = 1;
    long int temp;
@@ -59,3 +60,28 @@ void fibonacci()
    }
 }
 
+//nondefault
+Fib::Fib(const int &t)
+{
+    
+}
+
+//copy constructor
+Fib::Fib(const Fib &rhs)
+{
+  
+}
+
+//operator +=
+Fib & Fib::operator+=(const Fib &rhs)
+{
+    
+}
+
+//operator =
+Fib & Fib::operator=(const Fib &rhs)
+{
+    
+}
+
+//operator <<
