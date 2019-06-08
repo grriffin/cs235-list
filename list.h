@@ -31,7 +31,7 @@ public:
         Node *iter = rhs.pHead;
 
         //loop to copy over data, same as assignment =
-        while (iter != rhs.pTail) {
+        while (iter != end()) {
             this->push_back(iter->data);
             iter = iter->pNext;
         
@@ -44,7 +44,7 @@ public:
     ~list() { clear(); }
     list<T> &operator=(const list<T> &rhs) {
         Node *iter = rhs.pHead;
-        while (iter != rhs.pTail) {
+        while (iter != end()) {
             this->push_back(iter->data);
             iter = iter->pNext;
         }
