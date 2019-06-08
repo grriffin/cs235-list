@@ -23,7 +23,20 @@ class list
 public:
     // constructors, destructores, and assignment operator
     list() : numElements(0), pHead(NULL), pTail(NULL) {}
-    list(const list<T> &rhs) : pHead(NULL), pTail(NULL), numElements(0) { *this = rhs; }
+    list(const list<T> &rhs) : pHead(NULL), pTail(NULL), numElements(0)
+    {
+        Node *iter = rhs.pHead;
+
+        //loop to copy over data, same as assignment =
+        while (iter != nullptr)
+        {
+            this->push_back(iter->data);
+            iter = iter->pNext;
+
+        }
+        //set the size
+        numElements = rhs.numElements;
+    }
     ~list() { clear(); }
     list<T> &operator=(const list<T> &rhs)
     {
