@@ -1,11 +1,11 @@
 ###############################################################
 # Program:
 #     Assignment 07, LIST
-#     Brother XXXXX, CS235
+#     Brother JonesL, CS235
 # Author:
-#     <your name here>
+#     Nathan Rigg, Dallen Cluff, Dan Worwood, Griffin Pope
 # Summary:
-#     <put a description here>
+#     Implementation of list class using linked lists. Took probably 15 hours
 ###############################################################
 
 ##############################################################

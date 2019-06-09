@@ -32,7 +32,6 @@ public:
         {
             this->push_back(iter->data);
             iter = iter->pNext;
-
         }
         //set the size
         numElements = rhs.numElements;
@@ -40,7 +39,7 @@ public:
     ~list() { clear(); }
     list<T> &operator=(const list<T> &rhs)
     {
-       clear();
+        clear();
         Node *iter = rhs.pHead;
         while (iter != nullptr)
         {
@@ -104,74 +103,73 @@ template <typename T>
 class list<T>::iterator
 {
 public:
-   // constructors, destructors, and assignment operator
-   iterator() : p(NULL) {}
-   iterator(Node* p) : p(p) {}
-   iterator(const iterator& rhs) { *this = rhs; }
-   iterator& operator=(const iterator& rhs)
-   {
-      p = rhs.p;
-      return *this;
-   }
+    // constructors, destructors, and assignment operator
+    iterator() : p(NULL) {}
+    iterator(Node *p) : p(p) {}
+    iterator(const iterator &rhs) { *this = rhs; }
+    iterator &operator=(const iterator &rhs)
+    {
+        p = rhs.p;
+        return *this;
+    }
 
-   // equals, not equals operator
-   bool operator==(const iterator& rhs) const
-   {
-      return rhs.p == this->p;
-   }
-   bool operator!=(const iterator& rhs) const
-   {
-      return rhs.p != this->p;
-   }
+    // equals, not equals operator
+    bool operator==(const iterator &rhs) const
+    {
+        return rhs.p == this->p;
+    }
+    bool operator!=(const iterator &rhs) const
+    {
+        return rhs.p != this->p;
+    }
 
-   // dereference operator, fetch a node
-   T& operator*()
-   {
-      if (p)
-         return p->data;
-      else
-         throw "ERROR: Trying to dereference a NULL pointer";
-   }
+    // dereference operator, fetch a node
+    T &operator*()
+    {
+        if (p)
+            return p->data;
+        else
+            throw "ERROR: Trying to dereference a NULL pointer";
+    }
 
-   // postfix increment
-   iterator operator++(int postfix)
-   {
-      iterator old(*this);
-      if (p)
-         p = p->pNext;
-      return old;
-   }
+    // postfix increment
+    iterator operator++(int postfix)
+    {
+        iterator old(*this);
+        if (p)
+            p = p->pNext;
+        return old;
+    }
 
-   // prefix increment
-   iterator& operator++()
-   {
-      if (p)
-         p = p->pNext;
-      return *this;
-   }
+    // prefix increment
+    iterator &operator++()
+    {
+        if (p)
+            p = p->pNext;
+        return *this;
+    }
 
-   // postfix decrement
-   iterator operator--(int postfix)
-   {
-      iterator old(*this);
-      if (p)
-         p = p->pPrev;
-      return old;
-   }
+    // postfix decrement
+    iterator operator--(int postfix)
+    {
+        iterator old(*this);
+        if (p)
+            p = p->pPrev;
+        return old;
+    }
 
-   // prefix decrement
-   iterator& operator--()
-   {
-      if (p)
-         p = p->pPrev;
-      return *this;
-   }
+    // prefix decrement
+    iterator &operator--()
+    {
+        if (p)
+            p = p->pPrev;
+        return *this;
+    }
 
 private:
-   list<T>::Node* p;
-   friend class list;
+    list<T>::Node *p;
+    friend class list;
 };
-
 
 template <typename T>
 typename list<T>::Node *list<T>::createNode()
@@ -275,14 +273,14 @@ typename list<T>::iterator list<T>::insert(iterator &it, const T &data)
         throw "No position specified";
     }
 
-    if (it == end()) 
+    if (it == end())
     {
-       pTail->pNext = pNew;
-       pNew->pPrev = pTail;
-       pTail = pNew;
-       it = pNew;
-       numElements++;
-       return iterator(pNew);
+        pTail->pNext = pNew;
+        pNew->pPrev = pTail;
+        pTail = pNew;
+        it = pNew;
+        numElements++;
+        return iterator(pNew);
     }
 
     Node *pCurrent = it.p;
@@ -377,7 +375,6 @@ public:
         data = t;
     }
 };
-
 
 /*************************************************
 * LIST REVERSE ITERATOR
@@ -572,7 +569,7 @@ public:
     // postfix increment
     const_reverse_iterator operator++(int postfix)
     {
-        reverse_iterator old(*this);
+        const_reverse_iterator old(*this);
         if (p)
             p = p->pPrev;
         return old;

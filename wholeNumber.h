@@ -16,32 +16,34 @@
 class WholeNumber
 {
 public:
-// constructors. We will use the default destructor
-WholeNumber() { data.push_back(0); }
-WholeNumber(unsigned int value) { *this = value; }
-WholeNumber(const WholeNumber & rhs) { *this = rhs; }
+    // constructors. We will use the default destructor
+    WholeNumber() { data.push_back(0); }
+    WholeNumber(unsigned int value) { *this = value; }
+    WholeNumber(const WholeNumber &rhs) { *this = rhs; }
 
-// display the number
-friend std::ostream & operator << (std::ostream & out,
-const WholeNumber & rhs);
+    // display the number
+    friend std::ostream &operator<<(std::ostream &out,
+                                    const WholeNumber &rhs);
 
-// fetch a given number
-friend std::istream & operator >> (std::istream & in, WholeNumber & rhs);
+    // fetch a given number
+    friend std::istream &operator>>(std::istream &in, WholeNumber &rhs);
 
-// add onto a given whole number
-WholeNumber & operator += (const WholeNumber & rhs);
+    // add onto a given whole number
+    WholeNumber &operator+=(const WholeNumber &rhs);
 
-// assignment operator for numbers
-WholeNumber & operator = (unsigned int value);
+    // assignment operator for numbers
+    WholeNumber &operator=(unsigned int value);
 
-// assignment operator for values
-WholeNumber & operator = (const WholeNumber & rhs)
-{
-data = rhs.data;
-return *this;
-}
+    // assignment operator for values
+    WholeNumber &operator=(const WholeNumber &rhs)
+    {
+        data = rhs.data;
+        return *this;
+    }
+
 private:
-custom::list <int> data;
+    typedef custom::list<int> list_type;
+    list_type data;
 };
 
 #endif // WHOLE_NUMBER_H

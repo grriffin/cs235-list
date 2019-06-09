@@ -17,18 +17,4 @@
 // the interactive fibonacci program
 void fibonacci();
 
-class Fib
-{
-private: 
-  //List<int> numbers;
-   custom::list<int> numbers;
-public:
-  Fib(){}
-  Fib(const int &t);
-  Fib(const Fib &rhs);
-  //Now sure how to add << operator
-  Fib &operator+=(const Fib &rhs);
-  Fib &operator=(const Fib &rhs);
-};
-
 #endif // FIBONACCI_H

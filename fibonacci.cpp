@@ -9,10 +9,10 @@
  **********************************************************************/
 
 #include <iostream>
-#include "fibonacci.h"   // for fibonacci() prototype
-#include "list.h"        // for LIST
+#include "fibonacci.h" // for fibonacci() prototype
+#include "wholeNumber.h"
+#include "list.h" // for LIST
 using namespace std;
-
 
 /************************************************
  * FIBONACCI
@@ -21,72 +21,40 @@ using namespace std;
  ***********************************************/
 void fibonacci()
 {
-    int number;
+   int number;
    cout << "How many Fibonacci numbers would you like to see? ";
-   cin  >> number;
+   cin >> number;
 
    //Will need to be of type Fib, but this works for now
-   long int first = 0;
-   long int second = 1;
-   long int temp;
+   WholeNumber first = 0;
+   WholeNumber second = 1;
    cout << 1 << endl;
    // your code to display the first <number> Fibonacci numbers
    for (int i = 1; i < number; i++)
    {
-      temp = second;           
-      second += first;          
-      first = temp;            
-
+      WholeNumber newNumber = first;
+      newNumber += second;
+      first = second;
+      second = newNumber;
       cout << second << ",";
    }
-   
+
    cout << endl;
-   
-    // prompt for a single large Fibonacci
+
+   // prompt for a single large Fibonacci
    cout << "Which Fibonacci number would you like to display? ";
-   cin  >> number;
-   
+   cin >> number;
+
+   //Will need to be of type Fib, but this works for now
    first = 0;
    second = 1;
-   //does not handle very large numbers such as fib #100.
+   // your code to display the first <number> Fibonacci numbers
    for (int i = 1; i < number; i++)
    {
-      temp = second;          
-      second += first;      
-      first = temp;   
-      
-      if (i == number - 1)
-      cout << second << endl;
+      WholeNumber newNumber = first;
+      newNumber += second;
+      first = second;
+      second = newNumber;
    }
-}
-
-//nondefault
-Fib::Fib(const int &t)
-{
-   numbers.push_front(t);
-}
-
-//copy constructor
-Fib::Fib(const Fib &rhs)
-{
-   *this = rhs;
-}
-
-//operator +=
-Fib & Fib::operator+=(const Fib &rhs)
-{
-    
-}
-
-//operator =
-Fib & Fib::operator=(const Fib &rhs)
-{
-   this->numbers = rhs.numbers;
-   return *this;
-}
-
-//operator <<
-ostream& operator << (ostream& out, const Fib& fib)
-{
-   
+   cout << second;
 }
