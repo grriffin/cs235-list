@@ -7,18 +7,16 @@ std::ostream &operator<<(std::ostream &out, const WholeNumber &rhs)
 {
     int num = 0; // count for the comma
     // traverse through the nodes
-    for (custom::list<int>::const_reverse_iterator it = rhs.data.crbegin(); it != rhs.data.crend(); ++it)
+    for (custom::list<int>::const_iterator it = rhs.data.cbegin(); it != rhs.data.cend(); ++it, ++num)
     {
-        if (!(num % 3))
+        if (num > 0)
         { // comma if there is another set of 3
+            std::cout << ",";
             std::cout << std::setfill('0') << std::setw(3) << *it;
-            std::cout << ", ";
-            num++;
         }
         else
         { // no comma if there isn't another set of 3
             std::cout << *it;
-            num++;
         }
     }
     // output the numbers in each node
@@ -65,12 +63,13 @@ WholeNumber &WholeNumber::operator+=(const WholeNumber &rhs)
     }
 
     WholeNumber newNumber;
+    newNumber.data.clear();
 
     list_type::reverse_iterator it1 = data.rbegin();
     list_type::const_reverse_iterator it2 = rhs.data.crbegin();
     int carryOver = 0;
 
-    while (it1 != data.rend() || it2 != rhs.data.crbegin())
+    while (it1 != data.rend() || it2 != rhs.data.crend())
     {
         int v1 = it1 == data.rend() ? 0 : *(it1++);
         int v2 = it2 == data.crend() ? 0 : *(it2++);
@@ -78,9 +77,12 @@ WholeNumber &WholeNumber::operator+=(const WholeNumber &rhs)
         int total = v1 + v2 + carryOver;
         int newValue = total % 1000;
         carryOver = total >= 1000 ? 1 : 0;
-
-        newNumber.data.push_back(newValue);
+        newNumber.data.push_front(newValue);
     }
+    //if we had a carry over left at the end, then we
+    //need to add a new bucket for it
+    if (carryOver > 0)
+        newNumber.data.push_front(carryOver);
 
     this->data = newNumber.data;
     return *this;

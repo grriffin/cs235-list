@@ -465,7 +465,7 @@ public:
     const_iterator() : p(NULL) {}
     const_iterator(Node *p) : p(p) {}
     const_iterator(const const_iterator &rhs) { *this = rhs; }
-    iterator &operator=(const const_iterator &rhs)
+    const_iterator &operator=(const const_iterator &rhs)
     {
         p = rhs.p;
         return *this;

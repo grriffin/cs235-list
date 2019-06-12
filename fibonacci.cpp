@@ -28,7 +28,7 @@ void fibonacci()
    //Will need to be of type Fib, but this works for now
    WholeNumber first = 0;
    WholeNumber second = 1;
-   cout << 1 << endl;
+   cout << "\t" << 1 << endl;
    // your code to display the first <number> Fibonacci numbers
    for (int i = 1; i < number; i++)
    {
@@ -36,10 +36,8 @@ void fibonacci()
       newNumber += second;
       first = second;
       second = newNumber;
-      cout << second << ",";
+      cout << "\t" << second << endl;
    }
-
-   cout << endl;
 
    // prompt for a single large Fibonacci
    cout << "Which Fibonacci number would you like to display? ";
@@ -56,5 +54,5 @@ void fibonacci()
       first = second;
       second = newNumber;
    }
-   cout << second;
+   cout << "\t" << second << endl;
 }
